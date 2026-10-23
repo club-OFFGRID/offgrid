@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OFFGRID</title>
+</head>
+<body>
+
+    <h1>OFFGRID</h1>
+    <h2>Resources</h2>
+
+    <div id="resources"></div>
+
+    <script>
+        async function loadResources() {
+            const response = await fetch("/api/resources");
+            const resources = await response.json();
+
+            const container = document.getElementById("resources");
+
+            resources.forEach(resource => {
+                const card = document.createElement("div");
+
+                card.innerHTML = `
+                    <h3>${resource.title}</h3>
+                    <p>${resource.category}</p>
+                    <p>${resource.description}</p>
+                    <a href="${resource.path}">Open</a>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        loadResources();
+    </script>
+
+</body>
+</html>
